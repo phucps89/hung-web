@@ -36,14 +36,24 @@ Route::get('/logout', [
 
 Route::group([
     'prefix' => 'user',
-    'middleware' => ['role:'.\App\Entities\Role::ADMIN]
+    'middleware' => ['role:admin' ]
 ], function(){
     Route::get('/', [
         'as' => ADMIN_USER_LIST,
         'uses' => 'UserController@list'
     ]);
-    Route::get('/{idUser}', [
+    Route::get('/add', [
+        'as' => ADMIN_USER_ADD,
+        'uses' => 'UserController@add'
+    ]);
+    Route::get('/edit/{idUser}', [
         'as' => ADMIN_USER_EDIT,
         'uses' => 'UserController@edit'
+    ]);
+    Route::post('/edit/{idUser}', [
+        'uses' => 'UserController@addEditPost'
+    ]);
+    Route::post('/add', [
+        'uses' => 'UserController@addEditPost'
     ]);
 });

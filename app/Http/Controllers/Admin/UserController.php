@@ -9,8 +9,13 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Entities\Permission;
+use App\Entities\Role;
+use App\Mail\ResetPasswordMail;
 use App\Repositories\UserRepository;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -20,7 +25,36 @@ class UserController extends Controller
         ]);
     }
 
-    function edit(UserRepository $userRepository, $idUser){
+    function add(){
+        return view('user.add_edit', [
+        ]);
+    }
 
+    function edit(UserRepository $userRepository, $idUser){
+        return view('user.add_edit', [
+            'user' => $userRepository->find($idUser)
+        ]);
+    }
+
+    function addEditPost(UserRepository $userRepository, Request $request, $idUser = null){
+        $user = null;
+        if($idUser != null){
+            $user = $userRepository->find($idUser);
+        }
+        else{
+            $user = $userRepository->makeModel();
+        }
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        $password = null;
+        if($user->password == null){
+            $password = str_random(8);;
+            $user->password = $password;
+        }
+        $user->save();
+        if($password != null){
+            Mail::send(new ResetPasswordMail($user->email, $user->name, $password));
+        }
+        return redirect()->route(ADMIN_USER_LIST);
     }
 }

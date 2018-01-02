@@ -50,11 +50,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if($exception instanceof HttpException){
-            if($exception->getStatusCode() == Response::HTTP_FORBIDDEN){
-                return \response()->view('403');
-            }
-        }
+//        if($exception instanceof HttpException){
+//            if($exception->getStatusCode() == Response::HTTP_FORBIDDEN){
+//                return \response()->view('403');
+//            }
+//        }
         return parent::render($request, $exception);
     }
 }
