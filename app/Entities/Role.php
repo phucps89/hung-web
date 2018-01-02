@@ -10,9 +10,8 @@ namespace App\Entities;
 
 
 use Illuminate\Database\Eloquent\Model;
-use Zizaco\Entrust\EntrustRole;
 
-class Role extends EntrustRole
+class Role extends \Spatie\Permission\Models\Role
 {
     const ADMIN = 'admin';
 }

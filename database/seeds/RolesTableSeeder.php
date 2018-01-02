@@ -23,10 +23,10 @@ class RolesTableSeeder extends Seeder
         $user = $userRepository->first();
         $admin = $roleRepository->create([
             'name'  =>  \App\Entities\Role::ADMIN,
-            'display_name' => 'Administrator',
+            'guard_name'  =>  AUTH_GUARD_USER,
             'description' => 'Administrator',
         ]);
-        $user->attachRole($admin);
+        $user->assignRole($admin);
 
         $this->permissions();
     }
@@ -35,8 +35,8 @@ class RolesTableSeeder extends Seeder
     {
         $permissionManageUser = new \App\Entities\Permission();
         $permissionManageUser->name         = \App\Entities\Permission::MANAGE_USER;
-        $permissionManageUser->display_name = 'Manage User'; // optional
-        $permissionManageUser->description  = 'View/Create/Edit/Delete User'; // optional
+        $permissionManageUser->description = 'Manage User'; // optional
+        $permissionManageUser->guard_name  =  AUTH_GUARD_USER;
         $permissionManageUser->save();
     }
 }

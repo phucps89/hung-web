@@ -9,9 +9,8 @@
 namespace App\Entities;
 
 
-use Zizaco\Entrust\EntrustPermission;
 
-class Permission extends EntrustPermission
+class Permission extends \Spatie\Permission\Models\Permission
 {
     const MANAGE_USER = 'manage_user';
 }

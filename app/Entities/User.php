@@ -5,13 +5,15 @@ namespace App\Entities;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
-use Zizaco\Entrust\Traits\EntrustUserTrait;
+use Spatie\Permission\Traits\HasPermissions;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use EntrustUserTrait; // add this trait to your user model
-
+    use HasRoles;
     use Notifiable;
+
+    protected $guard_name = AUTH_GUARD_USER;
 
     /**
      * The attributes that are mass assignable.
@@ -33,10 +35,5 @@ class User extends Authenticatable
 
     function setPasswordAttribute($raw){
         $this->attributes['password'] = Hash::make($raw);
-    }
-
-    public function restore()
-    {
-        $this->restoreSoftDelete();
     }
 }

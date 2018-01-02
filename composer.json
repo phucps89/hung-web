@@ -11,7 +11,7 @@
         "laravel/tinker": "~1.0",
         "prettus/l5-repository": "^2.6",
         "shipu/themevel": "^1.6",
-        "zizaco/entrust": "^1.8"
+        "spatie/laravel-permission": "^2.7"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
