@@ -36,7 +36,7 @@ Route::get('/logout', [
 
 Route::group([
     'prefix' => 'user',
-    'middleware' => ['role:admin' ]
+    'middleware' => ['adminSiteRole:admin','adminSitePermission:manage_user' ]
 ], function(){
     Route::get('/', [
         'as' => ADMIN_USER_LIST,

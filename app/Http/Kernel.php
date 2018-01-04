@@ -3,6 +3,8 @@
 namespace App\Http;
 
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\AdminSitePermissionMiddleware;
+use App\Http\Middleware\AdminSiteRoleMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -61,6 +63,8 @@ class Kernel extends HttpKernel
         'theme' => \Shipu\Themevel\Middleware\RouteMiddleware::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'role'       => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+        'adminSiteRole'       => AdminSiteRoleMiddleware::class,
+        'adminSitePermission'       => AdminSitePermissionMiddleware::class,
         'admin' => AdminMiddleware::class
     ];
 }
