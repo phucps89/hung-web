@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin;
 use App\Entities\Permission;
 use App\Entities\Role;
 use App\Mail\ResetPasswordMail;
+use App\Repositories\PermissionRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -55,6 +56,20 @@ class UserController extends Controller
         if($password != null){
             Mail::send(new ResetPasswordMail($user->email, $user->name, $password));
         }
+        return redirect()->route(ADMIN_USER_LIST);
+    }
+
+    function permission(UserRepository $userRepository, PermissionRepository $permissionRepository, $idUser){
+        $user = $userRepository->find($idUser);
+        $permissions = $permissionRepository->findWhere(['guard_name' => AUTH_GUARD_USER]);
+        $userHasPermission = $user->getAllPermissions();
+        return view('user.permission', compact('user', 'permissions', 'userHasPermission'));
+    }
+
+    function permissionPost(Request $request, UserRepository $userRepository, PermissionRepository $permissionRepository, $idUser){
+        $user = $userRepository->find($idUser);
+        $permissions = $permissionRepository->findWhereIn('id', array_keys($request->get('permission') ?? []));
+        $user->syncPermissions($permissions->pluck('name'));
         return redirect()->route(ADMIN_USER_LIST);
     }
 }

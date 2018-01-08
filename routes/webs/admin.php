@@ -13,6 +13,7 @@ define('ADMIN_LOGIN_POST', 'admin.login.post');
 define('ADMIN_USER_LIST', 'admin.user.list');
 define('ADMIN_USER_ADD', 'admin.user.add');
 define('ADMIN_USER_EDIT', 'admin.user.edit');
+define('ADMIN_USER_PERMISSION', 'admin.user.permission');
 
 Route::get('/', [
     'as' => ADMIN_HOME,
@@ -36,7 +37,7 @@ Route::get('/logout', [
 
 Route::group([
     'prefix' => 'user',
-    'middleware' => ['adminSiteRole:admin','adminSitePermission:manage_user' ]
+    'middleware' => ['adminSitePermission:'.\App\Entities\Permission::MANAGE_USER ]
 ], function(){
     Route::get('/', [
         'as' => ADMIN_USER_LIST,
@@ -50,8 +51,15 @@ Route::group([
         'as' => ADMIN_USER_EDIT,
         'uses' => 'UserController@edit'
     ]);
+    Route::get('/permission/{idUser}', [
+        'as' => ADMIN_USER_PERMISSION,
+        'uses' => 'UserController@permission'
+    ]);
     Route::post('/edit/{idUser}', [
         'uses' => 'UserController@addEditPost'
+    ]);
+    Route::post('/permission/{idUser}', [
+        'uses' => 'UserController@permissionPost'
     ]);
     Route::post('/add', [
         'uses' => 'UserController@addEditPost'

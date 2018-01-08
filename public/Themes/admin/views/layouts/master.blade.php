@@ -62,13 +62,14 @@
                         <ul class="nav side-menu">
                             <li><a href="{{route(ADMIN_HOME)}}"><i class="fa fa-home"></i> Home </a>
                             </li>
-                            @if(request()->user(AUTH_GUARD_USER)->hasRole([\App\Entities\Role::ADMIN]))
+                            @permission([\App\Entities\Permission::MANAGE_USER], AUTH_GUARD_USER)
                             <li><a><i class="fa fa-user"></i> User <span class="fa fa-chevron-down"></span> </a>
                                 <ul class="nav child_menu">
                                     <li><a href="{{route(ADMIN_USER_LIST)}}">List</a></li>
+                                    <li><a href="{{route(ADMIN_USER_ADD)}}">Add</a></li>
                                 </ul>
                             </li>
-                            @endif
+                            @endpermission
                         </ul>
                     </div>
 
@@ -248,6 +249,6 @@
 
 <!-- Custom Theme Scripts -->
 <script src="{{asset('bower/gentelella/build/js/custom.min.js')}}"></script>
-
+@yield('script')
 </body>
 </html>

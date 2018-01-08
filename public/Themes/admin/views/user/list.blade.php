@@ -30,7 +30,8 @@
                         <td class=" ">{{$user->name}}</td>
                         <td class=" ">{{$user->email}}</td>
                         <td class=" "></td>
-                        <td class=" last"><a href="{{route(ADMIN_USER_EDIT, [$user->id])}}">Edit</a>
+                        <td class=" last"><a href="{{route(ADMIN_USER_EDIT, [$user->id])}}">Edit</a> |
+                            <a href="{{route(ADMIN_USER_PERMISSION, [$user->id])}}">Permission</a>
                         </td>
                     </tr>
                 @endforeach
