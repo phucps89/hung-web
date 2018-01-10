@@ -166,6 +166,7 @@ return [
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         Shipu\Themevel\Providers\ThemevelServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        Unisharp\Ckeditor\ServiceProvider::class,
         /*
          * Package Service Providers...
          */

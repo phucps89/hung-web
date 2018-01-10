@@ -265,6 +265,7 @@
 
 <!-- Custom Theme Scripts -->
 <script src="{{asset('bower/gentelella/build/js/custom.min.js')}}"></script>
+<script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
 @yield('script')
 </body>
 </html>

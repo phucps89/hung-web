@@ -44,6 +44,7 @@
                             <button type="submit" class="btn btn-success">Submit</button>
                         </div>
                         {{csrf_field()}}
+                        <textarea id="ckeditor"></textarea>
                     </form>
                 </div>
             </div>
@@ -62,5 +63,6 @@
                 $(".bulk_action input[name^='permission']").iCheck('uncheck');
             })
         })
+        CKEDITOR.replace( 'ckeditor' );
     </script>
 @endsection
