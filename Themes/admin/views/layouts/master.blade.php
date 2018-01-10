@@ -71,10 +71,18 @@
                             </li>
                             @endpermission
                             @permission([\App\Entities\Permission::MANAGE_SIZE], AUTH_GUARD_USER)
-                            <li><a><i class="fa fa-user"></i> Size <span class="fa fa-chevron-down"></span> </a>
+                            <li><a><i class="fa fa-arrows"></i> Size <span class="fa fa-chevron-down"></span> </a>
                                 <ul class="nav child_menu">
                                     <li><a href="{{route(ADMIN_SIZE_LIST)}}">List</a></li>
                                     <li><a href="{{route(ADMIN_SIZE_ADD)}}">Add</a></li>
+                                </ul>
+                            </li>
+                            @endpermission
+                            @permission([\App\Entities\Permission::MANAGE_COLOR], AUTH_GUARD_USER)
+                            <li><a><i class="fa fa-tint"></i> Color <span class="fa fa-chevron-down"></span> </a>
+                                <ul class="nav child_menu">
+                                    <li><a href="{{route(ADMIN_COLOR_LIST)}}">List</a></li>
+                                    <li><a href="{{route(ADMIN_COLOR_ADD)}}">Add</a></li>
                                 </ul>
                             </li>
                             @endpermission

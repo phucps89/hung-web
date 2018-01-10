@@ -10,13 +10,23 @@ define('ADMIN_HOME', 'admin.home');
 define('ADMIN_LOGIN', 'admin.login');
 define('ADMIN_LOGOUT', 'admin.logout');
 define('ADMIN_LOGIN_POST', 'admin.login.post');
+
 define('ADMIN_USER_LIST', 'admin.user.list');
 define('ADMIN_USER_ADD', 'admin.user.add');
 define('ADMIN_USER_EDIT', 'admin.user.edit');
 define('ADMIN_USER_PERMISSION', 'admin.user.permission');
+
 define('ADMIN_SIZE_LIST', 'admin.size.list');
 define('ADMIN_SIZE_EDIT', 'admin.size.edit');
 define('ADMIN_SIZE_ADD', 'admin.size.add');
+
+define('ADMIN_COLOR_LIST', 'admin.color.list');
+define('ADMIN_COLOR_EDIT', 'admin.color.edit');
+define('ADMIN_COLOR_ADD', 'admin.color.add');
+
+/**
+ * Route Defined
+ */
 
 Route::get('/', [
     'as' => ADMIN_HOME,
@@ -90,5 +100,29 @@ Route::group([
     ]);
     Route::post('/add', [
         'uses' => 'SizeController@addEditPost'
+    ]);
+});
+
+Route::group([
+    'prefix' => 'color',
+    'middleware' => ['adminSitePermission:'.\App\Entities\Permission::MANAGE_COLOR ]
+], function(){
+    Route::get('/', [
+        'as' => ADMIN_COLOR_LIST,
+        'uses' => 'ColorController@list'
+    ]);
+    Route::get('/add', [
+        'as' => ADMIN_COLOR_ADD,
+        'uses' => 'ColorController@add'
+    ]);
+    Route::get('/edit/{idColor}', [
+        'as' => ADMIN_COLOR_EDIT,
+        'uses' => 'ColorController@edit'
+    ]);
+    Route::post('/edit/{idColor}', [
+        'uses' => 'ColorController@addEditPost'
+    ]);
+    Route::post('/add', [
+        'uses' => 'ColorController@addEditPost'
     ]);
 });
