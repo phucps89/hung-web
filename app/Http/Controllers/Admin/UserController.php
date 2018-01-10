@@ -22,7 +22,7 @@ class UserController extends Controller
 {
     function list(UserRepository $repository){
         return view('user.list', [
-            'users' => $repository->paginate()
+            'users' => $repository->makeModel()->whereRaw('id != 1')->paginate()
         ]);
     }
 
@@ -38,6 +38,10 @@ class UserController extends Controller
     }
 
     function addEditPost(UserRepository $userRepository, Request $request, $idUser = null){
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|max:255|unique:'.$userRepository->makeModel()->getTable().',email,'.$idUser,
+        ]);
         $user = null;
         if($idUser != null){
             $user = $userRepository->find($idUser);

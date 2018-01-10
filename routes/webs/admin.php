@@ -14,6 +14,9 @@ define('ADMIN_USER_LIST', 'admin.user.list');
 define('ADMIN_USER_ADD', 'admin.user.add');
 define('ADMIN_USER_EDIT', 'admin.user.edit');
 define('ADMIN_USER_PERMISSION', 'admin.user.permission');
+define('ADMIN_SIZE_LIST', 'admin.size.list');
+define('ADMIN_SIZE_EDIT', 'admin.size.edit');
+define('ADMIN_SIZE_ADD', 'admin.size.add');
 
 Route::get('/', [
     'as' => ADMIN_HOME,
@@ -63,5 +66,29 @@ Route::group([
     ]);
     Route::post('/add', [
         'uses' => 'UserController@addEditPost'
+    ]);
+});
+
+Route::group([
+    'prefix' => 'size',
+    'middleware' => ['adminSitePermission:'.\App\Entities\Permission::MANAGE_SIZE ]
+], function(){
+    Route::get('/', [
+        'as' => ADMIN_SIZE_LIST,
+        'uses' => 'SizeController@list'
+    ]);
+    Route::get('/add', [
+        'as' => ADMIN_SIZE_ADD,
+        'uses' => 'SizeController@add'
+    ]);
+    Route::get('/edit/{idSize}', [
+        'as' => ADMIN_SIZE_EDIT,
+        'uses' => 'SizeController@edit'
+    ]);
+    Route::post('/edit/{idUser}', [
+        'uses' => 'SizeController@addEditPost'
+    ]);
+    Route::post('/add', [
+        'uses' => 'SizeController@addEditPost'
     ]);
 });

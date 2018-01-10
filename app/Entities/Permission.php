@@ -13,4 +13,5 @@ namespace App\Entities;
 class Permission extends \Spatie\Permission\Models\Permission
 {
     const MANAGE_USER = 'manage_user';
+    const MANAGE_SIZE = 'manage_size';
 }
