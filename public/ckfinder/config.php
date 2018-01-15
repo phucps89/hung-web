@@ -1,8 +1,10 @@
 <?php
 
-require __DIR__.'/../../vendor/autoload.php';
+require_once __DIR__.'/../../vendor/autoload.php';
 $app = require_once __DIR__.'/../../bootstrap/app.php';
 $app->make('Illuminate\Contracts\Http\Kernel')
+    ->pushMiddleware(\App\Http\Middleware\EncryptCookies::class)
+    ->pushMiddleware(\Illuminate\Session\Middleware\StartSession::class)
     ->handle(Illuminate\Http\Request::capture());
 /*
  * CKFinder Configuration File
@@ -29,8 +31,9 @@ $config = array();
 /*============================ Enable PHP Connector HERE ==============================*/
 // http://docs.cksource.com/ckfinder3-php/configuration.html#configuration_options_authentication
 
-$config['authentication'] = function () {
-    return \Illuminate\Support\Facades\Auth::guard('user')->check();
+$config['authentication'] = function () use ($app) {
+//    var_dump(Auth::guard('user')->user());exit;
+    return $app->make('auth')->guard('user')->check();
 };
 
 /*============================ License Key ============================================*/

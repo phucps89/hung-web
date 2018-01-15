@@ -14,7 +14,7 @@
             @endif
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Add / Edit Size</h2>
+                    <h2>Add / Edit Color</h2>
 
                     <div class="clearfix"></div>
                 </div>

@@ -12,8 +12,8 @@
                             <input type="checkbox" id="check-all" class="flat">
                         </th>
                         <th class="column-title">Name </th>
-                        <th class="column-title">Email</th>
-                        <th class="column-title">Avatar</th>
+                        <th class="column-title">Title</th>
+                        <th class="column-title">Image</th>
                         <th class="column-title no-link last"><span class="nobr">Action</span>
                         </th>
                         <th class="bulk-actions" colspan="7">
@@ -23,23 +23,22 @@
                     </thead>
 
                     <tbody>
-                    @foreach($users as $i => $user)
+                    @foreach($categories as $i => $category)
                         <tr class="{{$i%2 == 0? 'odd' : 'even'}} pointer">
                             <td class="a-center ">
                                 <input type="checkbox" class="flat" name="table_records">
                             </td>
-                            <td class=" ">{{$user->name}}</td>
-                            <td class=" ">{{$user->email}}</td>
-                            <td class=" "></td>
-                            <td class=" last"><a href="{{route(ADMIN_USER_EDIT, [$user->id])}}">Edit</a> |
-                                <a href="{{route(ADMIN_USER_PERMISSION, [$user->id])}}">Permission</a>
+                            <td class=" ">{{$category->name}}</td>
+                            <td class=" ">{{$category->title}}</td>
+                            <td class=" "><img src="{{$category->image}}"></td>
+                            <td class=" last"><a href="{{route(ADMIN_CATEGORY_EDIT, [$user->id])}}">Edit</a>
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
 
-                {!! $users->render() !!}
+                {!! $categories->render() !!}
             </div>
         </div>
     </div>

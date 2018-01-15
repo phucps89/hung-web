@@ -24,6 +24,10 @@ define('ADMIN_COLOR_LIST', 'admin.color.list');
 define('ADMIN_COLOR_EDIT', 'admin.color.edit');
 define('ADMIN_COLOR_ADD', 'admin.color.add');
 
+define('ADMIN_CATEGORY_LIST', 'admin.category.list');
+define('ADMIN_CATEGORY_EDIT', 'admin.category.edit');
+define('ADMIN_CATEGORY_ADD', 'admin.category.add');
+
 /**
  * Route Defined
  */
@@ -124,5 +128,29 @@ Route::group([
     ]);
     Route::post('/add', [
         'uses' => 'ColorController@addEditPost'
+    ]);
+});
+
+Route::group([
+    'prefix' => 'category',
+    'middleware' => ['adminSitePermission:'.\App\Entities\Permission::MANAGE_CATEGORY ]
+], function(){
+    Route::get('/', [
+        'as' => ADMIN_CATEGORY_LIST,
+        'uses' => 'CategoryController@list'
+    ]);
+    Route::get('/add', [
+        'as' => ADMIN_CATEGORY_ADD,
+        'uses' => 'CategoryController@add'
+    ]);
+    Route::get('/edit/{idColor}', [
+        'as' => ADMIN_CATEGORY_EDIT,
+        'uses' => 'CategoryController@edit'
+    ]);
+    Route::post('/edit/{idColor}', [
+        'uses' => 'CategoryController@addEditPost'
+    ]);
+    Route::post('/add', [
+        'uses' => 'CategoryController@addEditPost'
     ]);
 });

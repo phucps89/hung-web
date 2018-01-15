@@ -15,4 +15,5 @@ class Permission extends \Spatie\Permission\Models\Permission
     const MANAGE_USER = 'manage_user';
     const MANAGE_SIZE = 'manage_size';
     const MANAGE_COLOR = 'manage_color';
+    const MANAGE_CATEGORY = 'manage_category';
 }
