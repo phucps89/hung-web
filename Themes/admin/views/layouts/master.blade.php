@@ -25,9 +25,16 @@
     <link href="{{asset('bower/gentelella/vendors/jqvmap/dist/jqvmap.min.css')}}" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
     <link href="{{asset('bower/gentelella/vendors/bootstrap-daterangepicker/daterangepicker.css')}}" rel="stylesheet">
-
+    <!-- Select2 -->
+    <link href="{{asset('bower/gentelella/vendors/select2/dist/css/select2.min.css')}}" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="{{asset('bower/gentelella/build/css/custom.min.css')}}" rel="stylesheet">
+
+    <style>
+        .table tr.sub{
+            background: #d1d1d1;
+        }
+    </style>
 </head>
 
 <body class="nav-md">
@@ -270,7 +277,8 @@
 <!-- bootstrap-daterangepicker -->
 <script src="{{asset('bower/gentelella/vendors/moment/min/moment.min.js')}}"></script>
 <script src="{{asset('bower/gentelella/vendors/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
-
+<!-- Select2 -->
+<script src="{{asset('bower/gentelella/vendors/select2/dist/js/select2.full.min.js')}}"></script>
 <!-- Custom Theme Scripts -->
 <script src="{{asset('bower/gentelella/build/js/custom.min.js')}}"></script>
 <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
